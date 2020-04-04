@@ -1,0 +1,73 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int T,N[100], a[100][100];
+    int i,j,k,l;
+    int  a2[100][3];
+    int a1[100][100];
+    cin>>T;
+    int tempr, tempc, cr=0, cc=0;
+    for(i=0;i<T;i++)
+     {
+        cin>>N[i];
+        
+        for (j=0;j<N[i];j++)
+            {
+                for (k=0;k<N[i];k++)
+                {
+                    cin>>a[j][k];
+                    a1[j][k] = a[j][k];
+                    if (j==k)
+                    {
+                        a2[i][0]+=a[j][k];
+                    }
+                }
+            }
+        for (j=0;j<N[i];j++)
+        {    
+            for (k=0;k<N[i];k++)
+                {
+                    tempr=a[j][k];
+                    if (tempr!=0)
+                        {
+                            for(l=k+1;l<N[i];l++)
+                                if ((tempr==a[j][l]) && (a[j][l]!=0))
+                                {
+                                    a[j][l] = 0;
+                                    cr++;
+                                }
+                            
+                        }
+                    tempc = a1[k][j];
+                    if (tempc!=0)
+                    {
+                        for (l=k+1;l<N[i];l++)
+                            if((tempc==a1[l][j]) && (a1[l][j]!=0))
+                            {
+                                a1[l][j] = 0;
+                                cc++;
+                            }
+                        
+                    }
+                }
+                if (cr!=0)
+                {
+                    a2[i][1]+=1;
+                    cr = 0;
+                }
+                if (cc!=0)
+                {
+                   a2[i][2]+=1;
+                   cc = 0;
+                }
+        }
+     }
+     
+    for (i=0;i<T;i++)
+        {
+            cout<<"Case #"<<(i+1)<<": "<<a2[i][0];
+            cout<<" "<<a2[i][1]<<" "<<a2[i][2]<<endl;
+        }
+    return 0;
+}
