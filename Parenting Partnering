@@ -1,0 +1,87 @@
+T=int(input())
+for i in range(T):
+    N=int(input())
+    l=[]
+    m=[]
+    r="IMPOSSIBLE"
+    ans=""
+    s=[]
+    flag=0
+    visited=[]
+    for j in range(N):
+        s.append(" ")
+        visited.append(" ")
+        
+    cmax=0
+    jmax=0
+    for j in range(N):
+        x=list(map(int,input().split()))
+        l.append(x)
+    for j in l:
+        m.append(j)
+    l.sort()
+    
+    index=m.index(l[0])
+    s[index]="C"
+    cmax=l[0][1]
+    occur=[]
+    for g in range(len(l)):
+        temp=[inde for inde ,value in enumerate(m) if value==l[g]]
+        if(len(temp)>2):
+            flag=1
+        occur.append(temp)
+    if(flag!=1):
+        temp=[inde for inde ,value in enumerate(m) if value==l[0]]
+        if(len(temp)>2):
+            visited[temp[0]]="C"
+            visited[temp[1]]="C"
+            for b in range(2,len(temp)):
+                visited[temp[b]]="N"
+        else:
+            for b in (temp):
+                visited[b]="C"
+        m[index]=[]
+        for p in range(1,len(l)):
+            ind=m.index(l[p])
+            if(l[p][0]>=cmax and visited[ind]!="C" and visited[ind]!="N"):
+
+                s[ind]="C"
+                cmax=l[p][1]
+                m[ind]=[]
+                temp=[inde for inde ,value in enumerate(m) if value==l[p]]
+                if(len(temp)>2):
+                    visited[temp[0]]="C"
+                    visited[temp[1]]="C"
+                    for b in range(2,len(temp)):
+                        visited[temp[b]]="N"
+                else:
+                    for b in (temp):
+                        visited[b]="C"
+
+            elif(l[p][0]<=cmax and l[p][0]>=jmax and visited[ind]!="J" and visited[ind]!="N"):
+                s[ind]="J"
+                jmax=l[p][1]
+                m[ind]=[]
+                temp=[inde for inde ,value in enumerate(m) if value==l[p]]
+                if(len(temp)>2):
+                    visited[temp[0]]="J"
+                    visited[temp[1]]="J"
+                    for b in range(2,len(temp)):
+                        visited[temp[b]]="N"
+                else:
+                    for b in (temp):
+                        visited[b]="J"
+            else:
+                s[ind]="N"
+                m[ind]=[]
+                temp=[inde for inde ,value in enumerate(m) if value==l[0]]
+                for b in temp:
+                    visited[b]="N"
+        for q in s:
+            ans=ans+q
+        if("N" in s):
+            print("Case #{}: {}".format(i+1,r))
+        else:
+            print("Case #{}: {}".format(i+1,ans))
+    else:
+        print("Case #{}: {}".format(i+1,r))
