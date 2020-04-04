@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int T;
+    cin>>T;
+    string B;
+    cin>>B;
+    while(T--)
+    {
+        char c1;
+        string answer="";
+        for(int i=0;i<10;i++)
+        {
+            answer+="0";
+        }
+        for(int z=1;z<=10;z++)
+        {
+            cout<<z<<endl;
+            cout.flush();
+            cin>>c1;
+            answer[z-1]=c1;
+        }
+        cout<<answer<<endl;
+        cout.flush();
+        char check;
+        cin>>check;
+        if(check=='Y')
+          continue;
+        else 
+          return 0;
+    }
+    return 0;
+}
